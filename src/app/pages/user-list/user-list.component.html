@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="content">
+    <h2>User List</h2>
+    <button class="btn btn-primary mb-3" (click)="addUser()">Add User</button>
+    <!-- Add User button -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Email</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Date of Birth</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Status</th>
+          <th scope="col">Role</th>
+          <th scope="col">Action</th>
+          <!-- Add Action column header -->
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track $index) {
+        <tr>
+          <th scope="row">{{ user.userId }}</th>
+          <td>{{ user.email }}</td>
+          <td>{{ user.fullName }}</td>
+          <td>{{ user.dateOfBirth }}</td>
+          <td>{{ user.gender ? "Male" : "Female" }}</td>
+          <td>{{ user.address }}</td>
+          <td>{{ user.phoneNumber }}</td>
+          <td>{{ user.status === 1 ? "Active" : "Inactive" }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="editUser(user)">
+              Edit
+            </button>
+            <!-- <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteUser(user.userId)"
+            >
+              Delete
+            </button> -->
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

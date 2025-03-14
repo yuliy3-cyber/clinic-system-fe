@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="content">
+    <h2>Edit User</h2>
+    <form (ngSubmit)="onUpdateUser()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="userObj.email"
+          name="email"
+          class="form-control"
+          required
+        />
+      </div>
+      <!-- <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="userObj.password"
+          name="password"
+          class="form-control"
+          required
+        />
+      </div> -->
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          id="fullName"
+          [(ngModel)]="userObj.fullName"
+          name="fullName"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input
+              type="date"
+              id="dateOfBirth"
+              [(ngModel)]="userObj.dateOfBirth"
+              name="dateOfBirth"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select
+              id="gender"
+              [(ngModel)]="userObj.gender"
+              name="gender"
+              class="form-control"
+              required
+            >
+              <option [ngValue]="true">Male</option>
+              <option [ngValue]="false">Female</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input
+          type="text"
+          id="address"
+          [(ngModel)]="userObj.address"
+          name="address"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input
+          type="text"
+          id="phoneNumber"
+          [(ngModel)]="userObj.phoneNumber"
+          name="phoneNumber"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="status">Status</label>
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="status"
+                [(ngModel)]="userObj.status"
+                name="status"
+                [checked]="userObj.status === 1"
+                (change)="toggleStatus($event)"
+              />
+              <label class="form-check-label" for="status">{{
+                userObj.status === 1 ? "Active" : "Inactive"
+              }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select
+              id="role"
+              [(ngModel)]="userObj.role"
+              name="role"
+              class="form-control"
+              required
+            >
+              <option value="Admin">Admin</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Patient">Patient</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Update User</button>
+    </form>
+  </div>
+</div>
