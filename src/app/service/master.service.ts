@@ -7,33 +7,33 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class MasterService {
-  private apiUrl = 'https://localhost:7293/api/User';
+  private apiUrl = 'https://localhost:7293/api';
   private loggedIn = false;
 
   constructor(private http: HttpClient) {}
 
   createNewUser(obj: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/AddUser`, obj);
+    return this.http.post(`${this.apiUrl}/User/AddUser`, obj);
   }
 
   getAllUsers(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/GetAllUsers`);
+    return this.http.get(`${this.apiUrl}/User/GetAllUsers`);
   }
 
   getUserById(userId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/GetUserById/${userId}`);
+    return this.http.get(`${this.apiUrl}/User/GetUserById/${userId}`);
   }
 
   updateUser(user: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/UpdateUser/${user.userId}`, user);
+    return this.http.put(`${this.apiUrl}/User/UpdateUser/${user.userId}`, user);
   }
 
   deleteUser(userId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/DeleteUser/${userId}`);
+    return this.http.delete(`${this.apiUrl}/User/DeleteUser/${userId}`);
   }
 
   login(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/Auth/Login`, user).pipe(
+    return this.http.post(`${this.apiUrl}/Auth/Login`, user).pipe(
       tap((response: any) => {
         if (response.token) {
           localStorage.setItem('token', response.token);
@@ -41,6 +41,10 @@ export class MasterService {
         }
       })
     );
+  }
+
+  register(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/Auth/Register`, user);
   }
 
   logout(): void {

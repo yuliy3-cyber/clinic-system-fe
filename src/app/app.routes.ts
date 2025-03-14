@@ -8,6 +8,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { NewUserComponent } from './pages/new-user/new-user.component';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { AuthGuard } from './auth.guard';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: '',
