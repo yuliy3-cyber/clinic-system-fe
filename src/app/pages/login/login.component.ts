@@ -16,17 +16,25 @@ export class LoginComponent {
   };
   router = inject(Router);
   http = inject(HttpClient);
+
   onLogin() {
     this.http
       .post('https://localhost:7293/api/Auth/Login', this.userObj)
       .subscribe(
         (response: any) => {
-          localStorage.setItem('token', response.data);
-          this.router.navigateByUrl('/appointment-list');
+          if (response.success) {
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('role', response.data.role); // Store the user's role
+            localStorage.setItem('userId', response.data.userId); // Store the user's role
+            this.router.navigateByUrl('/home');
+          } else {
+            alert(response.message || 'Failed to login');
+          }
         },
-        (error) => {
+        (error: any) => {
           // Handle login error
-          alert('Invalid credentials');
+          console.log(error.message);
+          alert(error.error.message || 'Failed to login');
         }
       );
   }

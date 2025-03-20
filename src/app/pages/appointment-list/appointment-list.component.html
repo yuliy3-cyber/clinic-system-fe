@@ -1,1 +1,37 @@
-<p>appointment-list works!</p>
+<div class="container-fluid">
+  <div class="content">
+    <h2>Appointment List</h2>
+    <button class="btn btn-primary mb-3" (click)="newAppointment()">
+      Add Appointment
+    </button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Patient Name</th>
+          <th scope="col">Doctor Name</th>
+          <th scope="col">Appointment Date</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ appointment.patient.fullName }}</td>
+          <td>{{ appointment.doctor.fullName }}</td>
+          <td>{{ appointment.appointmentDate | date : "short" }}</td>
+          <td>{{ getStatusLabel(appointment.status) }}</td>
+          <td>
+            <button
+              class="btn btn-primary btn-sm"
+              (click)="editAppointment(appointment)"
+            >
+              Edit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

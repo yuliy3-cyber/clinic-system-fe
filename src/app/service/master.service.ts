@@ -32,6 +32,40 @@ export class MasterService {
     return this.http.delete(`${this.apiUrl}/User/DeleteUser/${userId}`);
   }
 
+  getUsersByRole(role: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/User/GetUsersByRole/${role}`);
+  }
+
+  addAppointment(appointment: any): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/Appointment/AddAppointment`,
+      appointment
+    );
+  }
+
+  getAppointments(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/Appointment/GetAllAppointments`);
+  }
+
+  getAppointmentById(appointmentId: number): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}/Appointment/GetAppointmentById/${appointmentId}`
+    );
+  }
+
+  updateAppointment(appointmentId: number, appointment: any): Observable<any> {
+    return this.http.put(
+      `${this.apiUrl}/Appointment/UpdateAppointment/${appointmentId}`,
+      appointment
+    );
+  }
+
+  deleteAppointment(appointmentId: number): Observable<any> {
+    return this.http.delete(
+      `${this.apiUrl}/Appointment/DeleteAppointment/${appointmentId}`
+    );
+  }
+
   login(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/Auth/Login`, user).pipe(
       tap((response: any) => {

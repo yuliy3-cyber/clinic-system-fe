@@ -9,11 +9,14 @@ import { NewUserComponent } from './pages/new-user/new-user.component';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { AuthGuard } from './auth.guard';
 import { RegisterComponent } from './pages/register/register.component';
+import { EditAppointmentComponent } from './pages/edit-appointment/edit-appointment.component';
+import { HomeComponent } from './pages/home/home.component';
+import { BookAppointmentComponent } from './pages/book-appointment/book-appointment.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -29,33 +32,54 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
         path: 'appointment-list',
         component: AppointmentListComponent,
         canActivate: [AuthGuard],
+        data: { expectedRole: 'Admin' },
       },
       {
         path: 'new-appointment',
         component: NewAppointmentComponent,
         canActivate: [AuthGuard],
+        data: { expectedRole: 'Admin' },
+      },
+      {
+        path: 'edit-appointment/:id',
+        component: EditAppointmentComponent,
+        canActivate: [AuthGuard],
+        data: { expectedRole: 'Admin' },
       },
       {
         path: 'patient-list',
         component: PatientListComponent,
         canActivate: [AuthGuard],
+        data: { expectedRole: 'Admin' },
       },
       {
         path: 'user-list',
         component: UserListComponent,
         canActivate: [AuthGuard],
+        data: { expectedRole: 'Admin' },
       },
       {
         path: 'new-user',
         component: NewUserComponent,
         canActivate: [AuthGuard],
+        data: { expectedRole: 'Admin' },
       },
       {
         path: 'edit-user/:id',
         component: EditUserComponent,
+        canActivate: [AuthGuard],
+        data: { expectedRole: 'Admin' },
+      },
+      {
+        path: 'book-appointment',
+        component: BookAppointmentComponent,
         canActivate: [AuthGuard],
       },
     ],

@@ -4,25 +4,31 @@
     <form (ngSubmit)="onAddAppointment()">
       <div class="form-group">
         <label for="patientId">Patient</label>
-        <input
-          type="number"
+        <select
           id="patientId"
           [(ngModel)]="appointmentObj.patientId"
           name="patientId"
           class="form-control"
           required
-        />
+        >
+          <option *ngFor="let patient of patients" [value]="patient.userId">
+            {{ patient.fullName }}
+          </option>
+        </select>
       </div>
       <div class="form-group">
         <label for="doctorId">Doctor</label>
-        <input
-          type="number"
+        <select
           id="doctorId"
           [(ngModel)]="appointmentObj.doctorId"
           name="doctorId"
           class="form-control"
           required
-        />
+        >
+          <option *ngFor="let doctor of doctors" [value]="doctor.userId">
+            {{ doctor.fullName }}
+          </option>
+        </select>
       </div>
       <div class="form-group">
         <label for="appointmentDate">Date & Time</label>
