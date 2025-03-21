@@ -12,6 +12,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { EditAppointmentComponent } from './pages/edit-appointment/edit-appointment.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BookAppointmentComponent } from './pages/book-appointment/book-appointment.component';
+import { AppointmentDetailsComponent } from './pages/appointment-details/appointment-details.component';
 
 export const routes: Routes = [
   {
@@ -39,7 +40,7 @@ export const routes: Routes = [
         path: 'appointment-list',
         component: AppointmentListComponent,
         canActivate: [AuthGuard],
-        data: { expectedRole: 'Admin' },
+        // data: { expectedRole: 'Admin' },
       },
       {
         path: 'new-appointment',
@@ -51,7 +52,7 @@ export const routes: Routes = [
         path: 'edit-appointment/:id',
         component: EditAppointmentComponent,
         canActivate: [AuthGuard],
-        data: { expectedRole: 'Admin' },
+        // data: { expectedRole: 'Admin' },
       },
       {
         path: 'patient-list',
@@ -80,6 +81,11 @@ export const routes: Routes = [
       {
         path: 'book-appointment',
         component: BookAppointmentComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'appointment-details/:id',
+        component: AppointmentDetailsComponent,
         canActivate: [AuthGuard],
       },
     ],

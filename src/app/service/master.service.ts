@@ -43,8 +43,13 @@ export class MasterService {
     );
   }
 
-  getAppointments(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/Appointment/GetAllAppointments`);
+  getAppointments(requestParams: any): Observable<any> {
+    const userId = Number(localStorage.getItem('userId')); // Convert userId to number
+    requestParams.userId = userId;
+    return this.http.post(
+      `${this.apiUrl}/Appointment/GetAllAppointments`,
+      requestParams
+    );
   }
 
   getAppointmentById(appointmentId: number): Observable<any> {
@@ -66,11 +71,20 @@ export class MasterService {
     );
   }
 
+  changeStatus(model: {
+    appointmentId: number;
+    status: number;
+  }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/Appointment/ChangeStatus`, model);
+  }
+
   login(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/Auth/Login`, user).pipe(
       tap((response: any) => {
         if (response.token) {
           localStorage.setItem('token', response.token);
+          localStorage.setItem('userId', response.userId);
+          localStorage.setItem('role', response.role);
           this.loggedIn = true;
         }
       })
