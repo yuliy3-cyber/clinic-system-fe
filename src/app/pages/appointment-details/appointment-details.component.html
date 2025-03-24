@@ -1,0 +1,64 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h3>Appointment Details</h3>
+    </div>
+    <div class="card-body" *ngIf="appointment">
+      <div class="row mb-3">
+        <div class="col-sm-3"><strong>Patient Name:</strong></div>
+        <div class="col-sm-9">{{ appointment.patient.fullName }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-3"><strong>Gender:</strong></div>
+        <div class="col-sm-9">
+          {{ appointment.patient.gender ? "Male" : "Female" }}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-3"><strong>Phone Number:</strong></div>
+        <div class="col-sm-9">{{ appointment.patient.phoneNumber }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-3"><strong>Address:</strong></div>
+        <div class="col-sm-9">{{ appointment.patient.address }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-3"><strong>Doctor Name:</strong></div>
+        <div class="col-sm-9">{{ appointment.doctor.fullName }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-3"><strong>Appointment Date:</strong></div>
+        <div class="col-sm-9">
+          {{ appointment.appointmentDate | date : "fullDate" }} at
+          {{ appointment.appointmentDate | date : "shortTime" }}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-3"><strong>Status:</strong></div>
+        <div class="col-sm-9">{{ getStatusLabel(appointment.status) }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-3"><strong>Diagnosis:</strong></div>
+        <div class="col-sm-9">
+          <textarea
+            *ngIf="userRole === 'Doctor'"
+            class="form-control"
+            [(ngModel)]="diagnosis"
+            rows="3"
+          ></textarea>
+          <div *ngIf="userRole !== 'Doctor'">{{ diagnosis }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button
+        *ngIf="userRole === 'Doctor'"
+        class="btn btn-primary"
+        (click)="updateDiagnosis()"
+      >
+        Update Diagnosis
+      </button>
+      <button class="btn btn-secondary" (click)="goBack()">Back to List</button>
+    </div>
+  </div>
+</div>

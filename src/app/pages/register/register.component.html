@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="login-card">
+    <div class="logo-container">
+      <div class="logo-circle">
+        <i class="fas fa-user-plus"></i>
+      </div>
+      <h2>Create Account</h2>
+      <p class="subtitle">Please fill in the details to create an account</p>
+    </div>
+
+    <form id="registerForm" (ngSubmit)="onRegister()">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-container">
+          <i class="fas fa-envelope"></i>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            [(ngModel)]="userObj.email"
+            name="email"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-container">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            [(ngModel)]="userObj.password"
+            name="password"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="input-container">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm your password"
+            [(ngModel)]="userObj.confirmPassword"
+            name="confirmPassword"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <div class="input-container">
+          <i class="fas fa-user"></i>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Enter your full name"
+            [(ngModel)]="userObj.fullName"
+            name="fullName"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group-row">
+        <div class="form-group">
+          <label for="dateOfBirth">Date of Birth</label>
+          <div class="input-container">
+            <i class="fas fa-calendar-alt"></i>
+            <input
+              type="date"
+              id="dateOfBirth"
+              [(ngModel)]="userObj.dateOfBirth"
+              name="dateOfBirth"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <div class="input-container">
+            <i class="fas fa-venus-mars"></i>
+            <select
+              id="gender"
+              [(ngModel)]="userObj.gender"
+              name="gender"
+              required
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address</label>
+        <div class="input-container">
+          <i class="fas fa-home"></i>
+          <input
+            type="text"
+            id="address"
+            placeholder="Enter your address"
+            [(ngModel)]="userObj.address"
+            name="address"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <div class="input-container">
+          <i class="fas fa-phone"></i>
+          <input
+            type="text"
+            id="phoneNumber"
+            placeholder="Enter your phone number"
+            [(ngModel)]="userObj.phoneNumber"
+            name="phoneNumber"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        Sign Up
+        <i class="fas fa-sign-in-alt"></i>
+      </button>
+    </form>
+    <p class="signup-link">
+      Already have an account? <a routerLink="/login">Sign in</a>
+    </p>
+  </div>
+</div>

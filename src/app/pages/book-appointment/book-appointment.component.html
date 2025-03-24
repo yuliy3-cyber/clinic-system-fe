@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="content">
+    <h2>Book Appointment</h2>
+    <form
+      #appointmentForm="ngForm"
+      (ngSubmit)="onBookAppointment(appointmentForm)"
+    >
+      <div class="form-group">
+        <label for="doctorId">Doctor</label>
+        <select
+          id="doctorId"
+          [(ngModel)]="appointmentObj.doctorId"
+          name="doctorId"
+          class="form-control"
+          required
+          #doctorId="ngModel"
+        >
+          <option value="" disabled selected>Select a doctor</option>
+          <option *ngFor="let doctor of doctors" [value]="doctor.userId">
+            {{ doctor.fullName }}
+          </option>
+        </select>
+        <div
+          *ngIf="doctorId.invalid && (doctorId.dirty || doctorId.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="doctorId.errors?.['required']">Doctor is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="appointmentDate">Date & Time</label>
+        <input
+          type="datetime-local"
+          id="appointmentDate"
+          [(ngModel)]="appointmentObj.appointmentDate"
+          name="appointmentDate"
+          class="form-control"
+          required
+          #appointmentDate="ngModel"
+        />
+        <div
+          *ngIf="
+            appointmentDate.invalid &&
+            (appointmentDate.dirty || appointmentDate.touched)
+          "
+          class="text-danger"
+        >
+          <div *ngIf="appointmentDate.errors?.['required']">
+            Date & Time is required.
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="appointmentForm.invalid"
+      >
+        Book Appointment
+      </button>
+    </form>
+  </div>
+</div>
