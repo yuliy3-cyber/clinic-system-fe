@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <button class="btn btn-primary mb-3" (click)="redirectToAddPage()">
+    Add Prescription
+  </button>
+  <div class="row">
+    <!-- First Column: List of Prescriptions -->
+    <div class="col-md-6">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Prescriptions</h3>
+      </div>
+      <ul class="list-group">
+        <li
+          *ngFor="let prescription of prescriptions"
+          class="list-group-item"
+          [class.active]="
+            prescription.prescriptionId === selectedPrescription?.prescriptionId
+          "
+          (click)="selectPrescription(prescription)"
+          style="cursor: pointer"
+        >
+          <strong>{{ prescription.prescriptionName }}</strong>
+          <p class="mb-0 text-muted">{{ prescription.description }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Second Column: Prescription Details -->
+    <div class="col-md-6" *ngIf="selectedPrescription">
+      <h3>Prescription Details</h3>
+      <div
+        *ngIf="
+          selectedPrescription.prescriptionDetails.length > 0;
+          else noDetails
+        "
+      >
+        <div
+          *ngFor="let detail of selectedPrescription.prescriptionDetails"
+          class="mb-3 border p-3 rounded"
+        >
+          <div class="row">
+            <div class="col-md-6">
+              <p><strong>Medication:</strong> {{ detail.medication }}</p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Dosage:</strong> {{ detail.dosage }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noDetails>
+        <p class="text-muted">No details available for this prescription.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

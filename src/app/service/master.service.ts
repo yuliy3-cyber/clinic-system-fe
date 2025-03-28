@@ -107,4 +107,15 @@ export class MasterService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
+  addPrescription(prescription: any): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/Prescription/AddPrescription`,
+      prescription
+    );
+  }
+
+  getPrescriptions(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/Prescription/GetAllPrescriptions`);
+  }
 }

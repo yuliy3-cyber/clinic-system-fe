@@ -99,6 +99,13 @@
               Edit
             </button>
             <button
+              *ngIf="appointment.status === 2 && userRole === 'Doctor'"
+              class="btn btn-primary btn-sm"
+              (click)="viewAppointmentDetails(appointment.appointmentId)"
+            >
+              Edit
+            </button>
+            <button
               *ngIf="userRole === 'Doctor' && appointment.status === 1"
               class="btn btn-success btn-sm"
               (click)="

@@ -49,6 +49,48 @@
           <div *ngIf="userRole !== 'Doctor'">{{ diagnosis }}</div>
         </div>
       </div>
+      <div class="row mb-3">
+        <div class="col-sm-3"><strong>Prescription:</strong></div>
+        <div class="col-sm-9">
+          <select
+            class="form-select"
+            [(ngModel)]="selectedPrescriptionId"
+            (change)="onPrescriptionChange()"
+          >
+            <option
+              *ngFor="let prescription of prescriptions"
+              [value]="prescription.prescriptionId"
+            >
+              {{ prescription.prescriptionName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Prescription Details -->
+      <div
+        class="row mb-3"
+        *ngIf="appointment.selectedPrescriptionDetails?.length > 0"
+      >
+        <div class="col-sm-3"><strong>Prescription Details:</strong></div>
+        <div class="col-sm-9">
+          <div
+            *ngFor="let detail of appointment.selectedPrescriptionDetails"
+            class="mb-2"
+          >
+            <p><strong>Medication:</strong> {{ detail.medication }}</p>
+            <p><strong>Dosage:</strong> {{ detail.dosage }}</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row mb-3"
+        *ngIf="appointment.selectedPrescriptionDetails?.length === 0"
+      >
+        <div class="col-sm-9 offset-sm-3 text-muted">
+          No details available for the selected prescription.
+        </div>
+      </div>
     </div>
     <div class="card-footer">
       <button

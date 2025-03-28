@@ -25,6 +25,14 @@
             >User</a
           >
         </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="prescription-list"
+            *ngIf="userRole === 'Admin'"
+            >Prescription</a
+          >
+        </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item" *ngIf="!isLoggedIn">

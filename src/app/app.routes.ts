@@ -13,6 +13,8 @@ import { EditAppointmentComponent } from './pages/edit-appointment/edit-appointm
 import { HomeComponent } from './pages/home/home.component';
 import { BookAppointmentComponent } from './pages/book-appointment/book-appointment.component';
 import { AppointmentDetailsComponent } from './pages/appointment-details/appointment-details.component';
+import { AddPrescriptionComponent } from './pages/add-prescription/add-prescription.component';
+import { PrescriptionListComponent } from './pages/prescription-list/prescription-list.component';
 
 export const routes: Routes = [
   {
@@ -87,6 +89,18 @@ export const routes: Routes = [
         path: 'appointment-details/:id',
         component: AppointmentDetailsComponent,
         canActivate: [AuthGuard],
+      },
+      {
+        path: 'prescription-list',
+        component: PrescriptionListComponent,
+        canActivate: [AuthGuard],
+        data: { expectedRole: 'Admin' },
+      },
+      {
+        path: 'add-prescription',
+        component: AddPrescriptionComponent,
+        canActivate: [AuthGuard],
+        data: { expectedRole: 'Admin' },
       },
     ],
   },

@@ -1,0 +1,106 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h3>Add Prescription</h3>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="addPrescription()">
+        <div class="row">
+          <!-- Column for Prescription Main Information -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="prescriptionName" class="form-label"
+                ><strong>Prescription Name:</strong></label
+              >
+              <input
+                type="text"
+                id="prescriptionName"
+                class="form-control"
+                [(ngModel)]="prescription.prescriptionName"
+                name="prescriptionName"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label"
+                ><strong>Description:</strong></label
+              >
+              <textarea
+                id="description"
+                class="form-control"
+                [(ngModel)]="prescription.description"
+                name="description"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Column for Prescription Details -->
+          <div class="col-md-6">
+            <h5>Details</h5>
+            <div
+              *ngFor="
+                let detail of prescription.prescriptionDetails;
+                let i = index
+              "
+              class="mb-3 prescription-detail"
+            >
+              <div class="row align-items-center">
+                <div class="col-md-5">
+                  <label for="medication-{{ i }}" class="form-label"
+                    ><strong>Medicine:</strong></label
+                  >
+                  <input
+                    type="text"
+                    id="medication-{{ i }}"
+                    class="form-control"
+                    [(ngModel)]="detail.medication"
+                    name="medication-{{ i }}"
+                    required
+                  />
+                </div>
+                <div class="col-md-5">
+                  <label for="dosage-{{ i }}" class="form-label"
+                    ><strong>Dosage:</strong></label
+                  >
+                  <input
+                    type="text"
+                    id="dosage-{{ i }}"
+                    class="form-control"
+                    [(ngModel)]="detail.dosage"
+                    name="dosage-{{ i }}"
+                    required
+                  />
+                </div>
+                <div class="col-md-2 text-end">
+                  <button
+                    type="button"
+                    class="btn btn-danger mt-4"
+                    (click)="removeDetail(i)"
+                  >
+                    -
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-secondary mt-3"
+              (click)="addDetail()"
+            >
+              +
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button
+          type="button"
+          class="btn btn-secondary mt-3 ms-2"
+          (click)="goBack()"
+        >
+          Get Back
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

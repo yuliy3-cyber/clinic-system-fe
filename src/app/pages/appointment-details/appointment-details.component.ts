@@ -15,6 +15,8 @@ export class AppointmentDetailsComponent implements OnInit {
   appointment: any;
   diagnosis: string = '';
   userRole: string | null = null;
+  prescriptions: any[] = [];
+  selectedPrescriptionId: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +29,7 @@ export class AppointmentDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.userRole = localStorage.getItem('role');
     this.getAppointmentDetails();
+    this.getPrescriptions();
   }
 
   getAppointmentDetails(): void {
@@ -41,10 +44,35 @@ export class AppointmentDetailsComponent implements OnInit {
     );
   }
 
+  getPrescriptions(): void {
+    this.masterService.getPrescriptions().subscribe(
+      (response: any) => {
+        this.prescriptions = response.data || response;
+      },
+      (error) => {
+        console.error('Error fetching prescriptions', error);
+      }
+    );
+  }
+
+  onPrescriptionChange(): void {
+    const selectedPrescription = this.prescriptions.find(
+      (prescription) =>
+        prescription.prescriptionId === this.selectedPrescriptionId
+    );
+    if (selectedPrescription) {
+      this.appointment.selectedPrescriptionDetails =
+        selectedPrescription.prescriptionDetails || [];
+    } else {
+      this.appointment.selectedPrescriptionDetails = [];
+    }
+  }
+
   updateDiagnosis(): void {
     const updatedAppointment = {
       ...this.appointment,
       diagnosis: this.diagnosis,
+      prescriptionId: this.selectedPrescriptionId,
     };
     this.masterService
       .updateAppointment(this.appointmentId, updatedAppointment)
